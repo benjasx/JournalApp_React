@@ -5,6 +5,7 @@ import { Outlet } from 'react-router';
 export const AuthLayout = () => {
     return (
         <Grid
+
             container
             spacing={0}
             direction="column"
