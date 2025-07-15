@@ -1,7 +1,16 @@
+import { useDispatch, useSelector } from "react-redux"
 import { AddOutlined, StarOutline } from "@mui/icons-material"
 import { Grid, IconButton, Typography } from "@mui/material"
+import { startNewNote } from "../../store/journal"
 
 export const NothingSelectedView = () => {
+    const {isSaving} = useSelector(state => state.journal)
+
+    const dispatch = useDispatch()
+    
+    const onCkickNewNote = () => {
+        dispatch(startNewNote())
+    }
     return (
         <Grid
             className='animate__animated animate__fadeIn animate__faster'
@@ -17,10 +26,12 @@ export const NothingSelectedView = () => {
             </Grid>
             <Grid>
                 <Typography variant="h5" sx={{ color: 'white' }}>
-                    Selecciona un registro
+                    Selecciona o crea una entrada
                 </Typography>
             </Grid>
             <IconButton
+            disabled={isSaving}
+            onClick={onCkickNewNote}
                 size="large"
                 sx={{
                     color: "white",

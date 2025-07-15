@@ -1,11 +1,16 @@
 
+import { useSelector } from "react-redux"
 import { NoteView, NothingSelectedView } from "../view/"
 
 export const JournalPage = () => {
+
+  const { active } = useSelector(state => state.journal)
+
   return (
     <>
-      {/* <NothingSelectedView /> */}
-      <NoteView />
+      {active === null
+        ? <NothingSelectedView />
+        : <NoteView />}
     </>
   )
 }

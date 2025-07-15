@@ -2,12 +2,18 @@ import { LogoutOutlined, MenuOutlined } from "@mui/icons-material"
 import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material"
 import { useDispatch } from "react-redux"
 import { startLogout } from "../../store/auth"
+import { desactivarNota } from "../../store/journal/journalSlice"
 
 
 export const NavBar = ({ drawerWidth }) => {
     const dispatch = useDispatch()
+
     const onlogout = () => {
         dispatch(startLogout())
+    }
+
+    const onHome = () => {
+        dispatch(desactivarNota())
     }
 
     return (
@@ -30,7 +36,11 @@ export const NavBar = ({ drawerWidth }) => {
                     <MenuOutlined />
                 </IconButton>
                 <Grid container width='100%' direction='row' alignItems='center' justifyContent='space-between'>
-                    <Typography>JournalApp</Typography>
+                    <button
+                        onClick={onHome}
+                        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: 'white' }}>
+                        <Typography>JournalApp</Typography>
+                    </button>
                     <IconButton color="error" onClick={onlogout}>
                         <LogoutOutlined />
                     </IconButton>
