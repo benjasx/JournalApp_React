@@ -2,7 +2,7 @@ import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite"
 import { FirebaseDB } from "../../firebase/config"
 import { addNewEmptyNote, deleteNoteById, isSavingNewNote, noteUpdated, setActiveNote, setNotes, setPhotosToActiveNote, setSaving } from "./journalSlice"
 import { fileUpload, loadNotes } from "../../helpers"
-import Swal from "sweetalert2"
+
 
 export const startNewNote = () => {
     return async (dispatch, getState) => {
@@ -19,7 +19,8 @@ export const startNewNote = () => {
 
         const newDoc = doc(collection(FirebaseDB, `${uid}/journal/notes`))
         await setDoc(newDoc, newNote)
-
+        
+        newNote.id = newDoc.id
 
         dispatch(addNewEmptyNote(newNote))
         dispatch(setActiveNote(newNote))
@@ -49,8 +50,6 @@ export const startSaveNote = (note) => {
 
         dispatch(noteUpdated(note));
         dispatch(setActiveNote(note))
-
-
     }
 }
 
