@@ -26,8 +26,13 @@ export const NoteView = () => {
 
   const dateString = useMemo(() => {
     const newDate = new Date(date);
-    return newDate.toUTCString()
-  })
+    const options = { 
+      day: 'numeric',
+      month: 'long', 
+      year: 'numeric'
+    };
+    return newDate.toLocaleDateString('es-ES', options);
+  }, [date])
 
   const onSaveNote = () => {
     dispatch(startSaveNote(formState))
@@ -99,13 +104,13 @@ export const NoteView = () => {
         <Button
           color="error"
           onClick={onDelete}
-          sx={{mt:2}}
+          sx={{ mt: 2 }}
         >
           <DeleteOutline /> Borrar
         </Button>
       </Grid>
       {nota.imageUrls && <ImageGalery images={nota.imageUrls} />}
-      
+
     </Grid>
 
   )
